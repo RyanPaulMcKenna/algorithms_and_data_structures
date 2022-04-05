@@ -1,12 +1,6 @@
 {
     "files.associations": {
-        "iosfwd": "cpp",
-        "xstring": "cpp",
-        "algorithm": "cpp",
         "atomic": "cpp",
-        "bit": "cpp",
-        "cctype": "cpp",
-        "clocale": "cpp",
         "cmath": "cpp",
         "compare": "cpp",
         "concepts": "cpp",
@@ -15,11 +9,11 @@
         "cstdio": "cpp",
         "cstdlib": "cpp",
         "cstring": "cpp",
-        "ctime": "cpp",
         "cwchar": "cpp",
         "exception": "cpp",
         "initializer_list": "cpp",
         "ios": "cpp",
+        "iosfwd": "cpp",
         "iostream": "cpp",
         "istream": "cpp",
         "iterator": "cpp",
@@ -42,7 +36,14 @@
         "xlocnum": "cpp",
         "xmemory": "cpp",
         "xstddef": "cpp",
+        "xstring": "cpp",
         "xtr1common": "cpp",
-        "xutility": "cpp"
-    }
+        "xutility": "cpp",
+        "bit": "cpp",
+        "cctype": "cpp",
+        "clocale": "cpp",
+        "ctime": "cpp",
+        "algorithm": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }
