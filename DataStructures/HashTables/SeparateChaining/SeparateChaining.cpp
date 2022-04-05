@@ -128,7 +128,7 @@ Node<K,V>* ListDelete(Node<K,V>* &L, Node<K,V>* x) // Worst case: O(n)
 }
 
 
-class HashTableSeperateChaining
+class HtSeperateChaining
 {
     private:
     int tableSize;
@@ -137,7 +137,7 @@ class HashTableSeperateChaining
     Node<std::string,int>* T[DefaultTableSize];
 
     public:
-    HashTableSeperateChaining()
+    HtSeperateChaining()
     {
         tableSize = DefaultTableSize;
         itemsInTable = 0;
@@ -146,14 +146,14 @@ class HashTableSeperateChaining
             T[i] = nullptr;
     }
 
-    int HashFunction(const std::string &key)
+    int HashFunction(const Entry<std::string,int> entry)
     {
-        return key.length() % tableSize; // puts values in range 0,1,2,3,4,5
+        return (entry.key.length() + entry.value) % tableSize; // puts values in range 0,1,2,3,4,5
     }
 
     void Insert(Entry<std::string, int> entry)
     {
-        int hash = HashFunction(entry.key);
+        int hash = HashFunction(entry);
         entry.hash = hash;
         insert<std::string,int>(T[hash],entry); // linked-list handles insert, hash func just chooses where.
         itemsInTable++;
@@ -164,13 +164,13 @@ class HashTableSeperateChaining
     {
         --itemsInTable;
         loadFactor = itemsInTable / tableSize;
-        int hash = HashFunction(x->data.key);
+        int hash = HashFunction(x->data);
         return ListDelete<std::string,int>(T[hash], x);
     }
 
     Node<std::string,int>* search(Entry<std::string, int> x)
     {
-        int hash = HashFunction(x.key);
+        int hash = HashFunction(x);
         return ListSearch<std::string,int>(T[hash], x);
     }
 
@@ -214,7 +214,7 @@ int main()
     p9.key = "Felix"; p9.value = 101;
     p10.key = "Anita"; p10.value = 17;
 
-    HashTableSeperateChaining myTbl;
+    HtSeperateChaining myTbl;
     myTbl.Insert(p1);
     myTbl.Insert(p2);
     myTbl.Insert(p3);
@@ -230,14 +230,10 @@ int main()
 
     Node<std::string, int>* node = myTbl.search(p9);
     std::cout << "\nFound " << node->data.key << " at position T[" << node->data.hash + 1 << "]\n";
-    std::cout << "Delete Felix\n"; 
+    std::cout << "\nDELETE: Felix\n\n"; 
     myTbl.Delete(node);
 
     myTbl.printTable();
-
-
-
-    // Open Addressing -> finds a new place by offsetting from hashed value.
 
 
     //------------------------------------------//
