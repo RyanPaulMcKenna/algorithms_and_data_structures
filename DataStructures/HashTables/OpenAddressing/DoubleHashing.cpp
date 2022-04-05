@@ -23,13 +23,9 @@ class Entry
     
     K key;
     V value;
-    bool tombstone;
     int hash;
     
-    Entry<K,V>() 
-    {
-        tombstone = false;
-    }
+    Entry<K,V>() {}
 
     Entry<K,V>(K key, V value)
     {
@@ -58,23 +54,62 @@ std::ostream& operator<<(std::ostream& os, const Entry<K,V> &obj)
     return os;
 };
 
-const int DefaultTableSize = 12;
-class HashTableLinearProbing
+bool isPrime(int n)
+{
+    // Corner cases
+    if (n <= 1)  return false;
+    if (n <= 3)  return true;
+   
+    // This is checked so that we can skip 
+    // middle five numbers in below loop
+    if (n%2 == 0 || n%3 == 0) return false;
+   
+    for (int i=5; i*i<=n; i=i+6)
+        if (n%i == 0 || n%(i+2) == 0)
+           return false;
+   
+    return true;
+}
+ 
+// Function to return the smallest
+// prime number greater than N
+int nextPrime(int N)
+{
+ 
+    // Base case
+    if (N <= 1)
+        return 2;
+ 
+    int prime = N;
+    bool found = false;
+ 
+    // Loop continuously until isPrime returns
+    // true for a number greater than n
+    while (!found) {
+        prime++;
+ 
+        if (isPrime(prime))
+            found = true;
+    }
+ 
+    return prime;
+}
+
+const int DefaultTableSize = 7; // Table Size must be a prime number.
+class HtDoubleHashing
 {
     private:
     int tableSize;
     int itemsInTable;
-    int probingFactor;
     float maxLoadFactor;
     float loadFactor;
     Entry<std::string,int>** table;
 
     public:
-    HashTableLinearProbing()
+    HtDoubleHashing()
     {
-        
+
         maxLoadFactor = 0.35;
-        probingFactor = 5; // probing factor and DefaultTableSize are relatively prime.
         tableSize = DefaultTableSize;
         itemsInTable = 0;
         loadFactor = 0;
@@ -91,23 +126,30 @@ class HashTableLinearProbing
         return tableSize;
     }
 
-    int HashFunction(const Entry<std::string,int> entry)
+    int H1(const Entry<std::string,int> entry)
     {
-        return (entry.key.length() + entry.value) % tableSize; // puts values in range 0,1,2,3,4,5
+        return (entry.key.length() + entry.value) % tableSize;
     }
 
-    int ProbingFunction(const int &x) // Must produce a cycle of length N to avoid causing an infinite loop.
+    int H2(const Entry<std::string,int> entry)
     {
-        // LINEAR PROBING, p(X) = ax , table size N, a and N must be relatively prime (GCD(a,N) = 1) to avoid infinite cycle.
-        // P(x) = 1*x is a popular choice.
-        return probingFactor*x;
+        return (entry.key.length() - entry.value) % tableSize;
+    }
+
+    int ProbingFunc(int x, int y)
+    {
+        return x*y;
     }
 
     void resizeTable()
     {
-        // Resize table by doubling or tripling or exponentially to a size that maintains GCD(a,N) = 1.
-        int oldTableSize = tableSize; // GCD(5, 12*2^i) = 1, for i = 0,1,2,3,... will always hold
+       // Tablesize must remain a prime
+        int oldTableSize = tableSize;
         tableSize *= 2;
+
+        // Find next prime number
+        tableSize = nextPrime(tableSize);
+
         Entry<std::string,int>** newTable = new Entry<std::string,int>*[tableSize];
         for (int i = 0; i < tableSize; i++)
         {
@@ -120,13 +162,17 @@ class HashTableLinearProbing
             if (table[index] != nullptr)
             {
                 tmp = table[index];
-                int x = 1;
-                int keyHash = HashFunction(*tmp);
-                int j = keyHash;
+                int x = 0;
+                int keyHash1 = H1(*tmp);
+                int keyHash2 = H2(*tmp);
+                int delta = keyHash2 % tableSize;
+                if (delta == 0) // Prevent infinite loop.
+                    delta = 1; 
+                int j = (keyHash1 + ProbingFunc(x,delta)) % tableSize;
                 while(newTable[j] != nullptr)
                 {
-                    j = (keyHash + ProbingFunction(x)) % tableSize;
                     x++;
+                    j = (keyHash1 + x*delta) % tableSize; // x*delta is the probing function x*H2(k)
                 }
                 newTable[j] = tmp;
             }
@@ -135,21 +181,26 @@ class HashTableLinearProbing
         table = nullptr;
 
         table = newTable;
-
+        loadFactor = itemsInTable / tableSize;
     }
 
     void Insert(const Entry<std::string, int> &entry)
     {
-        if ( (itemsInTable+1) >= floor(tableSize*maxLoadFactor) )
+        if ( itemsInTable >= floor(tableSize*maxLoadFactor) )
             resizeTable();
-        int x = 1;
-        int keyHash = HashFunction(entry);
-        int index = keyHash; 
+        
+        int x = 0;
+        int keyHash1 = H1(entry);
+        int keyHash2 = H2(entry);
+        int delta = keyHash2 % tableSize;
+        if (delta == 0) // Prevent infinite loop.
+            delta = 1; 
+        int index = (keyHash1 + x*delta) % tableSize;
  
-        while(table[index] != nullptr && table[index]->tombstone != true) /// Use of tombstone in insert known as lazy deletion.
+        while(table[index] != nullptr)
         {
-            index = (keyHash + ProbingFunction(x)) % tableSize;
             x++;
+            index = (keyHash1 + ProbingFunc(x,delta)) % tableSize; // Probing function.
         }
 
         Entry<std::string,int>* newEntry =  new Entry<std::string,int>();
@@ -159,39 +210,6 @@ class HashTableLinearProbing
 
         itemsInTable++;
         loadFactor = itemsInTable / tableSize;
-    }
-
-    Entry<std::string,int>* search(Entry<std::string, int> entry)
-    {
-        int x = 1;
-        int keyHash = HashFunction(entry);
-        int index = keyHash; 
-        
-        while(table[index] != nullptr && table[index]->key != entry.key)
-        {
-            index = (keyHash + ProbingFunction(x)) % DefaultTableSize;
-            x++;
-        }
-        return table[index];
-    }
-
-    void remove(Entry<std::string, int> entry)
-    {
-        int x = 1;
-        int keyHash = HashFunction(entry);
-        int index = keyHash; 
-        
-        while(table[index] != nullptr && table[index]->key != entry.key)
-        {
-            index = (keyHash + ProbingFunction(x)) % DefaultTableSize;
-            x++;
-        }
-        if (table[index] != nullptr)
-        {
-            table[index]->key = "-1"; // No name will ever be -1 therefore the loop will pass over the tomestone and search in the next spot.
-            table[index]->tombstone = true;
-        }
-        // Else, element did not exist.
     }
 
     void printTable()
@@ -215,7 +233,7 @@ class HashTableLinearProbing
 
 int main()
 {
-    HashTableLinearProbing ht;
+    HtDoubleHashing ht;
     Entry<std::string, int> p1,p2,p3,p4,p5,p6,p7,p8,p9,p10;
     p1.key = "Rai";  p1.value = 25;
     p2.key = "Rick"; p2.value = 61;
