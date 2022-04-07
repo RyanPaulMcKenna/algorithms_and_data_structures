@@ -1,7 +1,12 @@
 #include <iostream>
 
 
-// All operations run in Expected time O(h) ,h tree height of randomly built tree.
+// All operations run in Expected time O(h) ,h tree height of a randomly built complete binary tree.
+// that obeys the binary search tree poperty
+
+// Binary-serach-tree property:
+// node x in the tree, if y is node in the left subtree of x, then key[y] <= key[x].
+// If y is a ndoe in the right subtree of x, then key[x] <= key[y].
 
 class Node {
     public:
