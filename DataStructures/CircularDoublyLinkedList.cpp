@@ -1,4 +1,3 @@
-
 #include <iostream>
 
 using namespace std;
@@ -32,7 +31,7 @@ Node* ListSearch(Node* L, int k) // Worst case: O(n)
 void ListDelete(Node* L, Node* x) // Runs in O(1) but if Search must be called first then runs in O(n).
 {
     x->prev->next = x->next;
-    x-next->prev = x->prev;
+    x->next->prev = x->prev;
 }
 
 

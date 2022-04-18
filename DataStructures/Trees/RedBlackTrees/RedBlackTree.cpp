@@ -156,6 +156,105 @@ void InorderTreeWalk(Node* x)
     }
 };
 
+Node* TreeMinimum(Node* x)
+{
+    Node* it= x;
+    while(it->left != NIL)
+        it = it->left;
+    return it;
+}
+
+Node* TreeMaximum(Node* x)
+{
+    Node* it = x;
+    while(it->right != NIL)
+        it = it->right;
+    return it;
+}
+
+Node* TreeSuccesor(Node* x)
+{
+    if (x->right != NIL)
+        return TreeMinimum(x->right);
+    Node* y = x->parent;
+    Node* tmp = x;
+    while (y != NIL && tmp == y->right)
+    {
+        tmp = y;
+        y = y->parent;
+    }
+    return y;
+}
+
+void RedBlackDeleteFixup(Node* T, Node* x) // NOT COMPLETE.
+{
+    Node* w;
+    while(x != T && x->color == true)
+    {
+        if (x == x->parent->left)
+        {
+            w = x->parent->right;
+            if (w->color == true) 
+            {
+                x->parent->color = false;
+                leftRotate(T,x->parent);
+                w = x->parent->right;
+            }
+            if (w->left->color == true && w->right->color == true)
+            {
+                w->color = false;
+                x = x->parent;
+            } else if (w->right->color == true) {
+                w->left->color = true;
+                w->color = false;
+                rightRotate(T,w);
+                w = x->parent->right;
+            }
+            // ???
+            w->color = x->parent->color;
+            x->parent->color = true;
+            w->right->color = true;
+            leftRotate(T,x->parent);
+            x = T;
+        } else {
+            // left and right exchanged.
+        }
+    }
+    x->color = true;
+}
+
+Node* RedBlackDelete(Node* T, Node* z)
+{
+    Node* y;
+    Node* x;
+
+    if (z->left == NIL || z->right == NIL)
+        y = z; //  z has at most 1 child.
+    else
+        y = TreeSuccesor(z); // z has 2 children.
+
+    if (y->left != NIL)
+        x = y->left;
+    else
+        x = y->right;
+
+    x->parent = y->parent;
+    if (y->parent == NIL)
+        T = x;
+    else if (y == y->parent->left)
+        y->parent->left = x;
+    else
+        y->parent->right = x;
+
+
+    if (y != z)
+        z->key = y->key;
+
+    if (y->color == true)
+        RedBlackDeleteFixup(T,x);
+
+    return y;
+}
 
 int main()
 {
