@@ -11,6 +11,8 @@ void PrintArray(double arr[], size_t len)
 }
 void Merge(double A[], size_t start, size_t mid, size_t end)
 {
+	std::cout << "\n Merge " << std::endl;
+
 	size_t n1 = mid - start;
 	size_t n2 = end - mid;
 	size_t i = 0;
@@ -25,9 +27,7 @@ void Merge(double A[], size_t start, size_t mid, size_t end)
 	}
 	for (; j < n2; j++)
 	{
-
 		right[j] = A[mid + j];
-
 	}
 
 	left[n1] = std::numeric_limits<double>::infinity();
@@ -35,7 +35,7 @@ void Merge(double A[], size_t start, size_t mid, size_t end)
 
 	i = 0;
 	j = 0;
-	for (size_t k = start; k < end; k++)
+	for (size_t k = start; k < end; ++k)
 	{
 		if (left[i] <= right[j])
 		{

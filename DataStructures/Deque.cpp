@@ -12,7 +12,7 @@ class Deque {
         int head;
         int* Q;
     public:
-        Queue()
+        Deque()
         {
             head = 1; // set both to first pos.
             tail = 1;

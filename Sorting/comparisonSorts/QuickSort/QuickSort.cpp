@@ -3,16 +3,19 @@
 #include <algorithm>
 #include <experimental/random>
 
+
 int Partition(int A[], int p, int r)
 {
     int x = A[r];
     int i = p-1;
-    for (int j = p; j <= r-1; j++)
+    for (int j = p; j <= r-1; ++j)
+    {
         if (A[j] <= x)
         {
-            i++;
+            ++i;
             std::swap(A[i],A[j]);
         }
+    }
     std::swap(A[i+1], A[r]);
     return (i+1);
 }   
@@ -59,7 +62,7 @@ void PrintArr(int A[], int lenOfA)
 
 int main()
 {
-    int A[] = {8,67,5,6,3,2,1,23,45,34,4};
+    int A[] = {8,67,5,6,3,2,1,23,45,34,4}; 
     int lenOfA = sizeof(A)/sizeof(A[0]);
     PrintArr(A, lenOfA);
     QuickSort(A,0,lenOfA-1);

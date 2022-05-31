@@ -16,13 +16,33 @@ class Node {
         int key;
 };
 
-void InorderTreeWalk(Node* x)
+void InOrderTreeWalk(Node* x)
 {
     if (x != nullptr)
     {
-        InorderTreeWalk(x->left); 
+        InOrderTreeWalk(x->left); 
         std::cout << x->key << " ";
-        InorderTreeWalk(x->right);
+        InOrderTreeWalk(x->right);
+    }
+}
+
+void PreOrderTreeWalk(Node* x)
+{
+    if (x != nullptr)
+    {
+        std::cout << x->key << " ";
+        PreOrderTreeWalk(x->left); 
+        PreOrderTreeWalk(x->right);
+    }
+}
+
+void PostOrderTreeWalk(Node* x)
+{
+    if (x != nullptr)
+    {
+        PostOrderTreeWalk(x->left); 
+        PostOrderTreeWalk(x->right);
+        std::cout << x->key << " ";
     }
 }
 
@@ -80,7 +100,7 @@ Node* TreeSuccesor(Node* x)
 }
 
 
-Node* TreePredocessor(Node* x) // rework to be like above.
+Node* TreePredocessor(Node* x)
 {
     if (x->left != nullptr)
         return TreeMaximum(x->left);
@@ -175,7 +195,7 @@ int main()
 
     TreeInsert(T,z);
     
-    InorderTreeWalk(T);
+    InOrderTreeWalk(T);
     // Node* query = TreeSearch(T,20);
     // std::cout << query->key;
 
@@ -186,7 +206,7 @@ int main()
 
     std::cout << "\n";
 
-    InorderTreeWalk(T);
+    InOrderTreeWalk(T);
 
 
    //TreeInsert(n1,n3);
