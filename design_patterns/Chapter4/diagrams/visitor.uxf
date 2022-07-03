@@ -1,0 +1,41 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>100</x><y>50</y><w>120</w><h>80</h></coordinates><panel_attributes>bg=gray
+&lt;&lt;interface&gt;&gt;
+Visitor
+--
++ visit(e: ElementA)
++ visit(e: ElementB)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>380</x><y>50</y><w>120</w><h>70</h></coordinates><panel_attributes>bg=gray
+&lt;&lt;interface&gt;&gt;
+Element
+--
++ accept(v: Visitor)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>280</x><y>190</y><w>120</w><h>80</h></coordinates><panel_attributes>bg=gray
+ElementA
+--
+...
+--
++ featureA()
++ accept(v: Visitor)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>280</x><y>310</y><w>120</w><h>80</h></coordinates><panel_attributes>bg=gray
+ElementB
+--
+...
+--
++ featureB()
++ accept(v: Visitor)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>230</x><y>510</y><w>220</w><h>50</h></coordinates><panel_attributes>bg=light_gray
+halign=center
+valign=bottom
+element.accept(new ConcreteVisitor())
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>100</x><y>200</y><w>120</w><h>70</h></coordinates><panel_attributes>bg=gray
+ConcreteVisitors
+--
++ visit(e: ElementA)
++ visit(e: ElementB)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>390</x><y>110</y><w>70</w><h>270</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>50;10;50;250;10;250</additional_attributes></element><element><id>Relation</id><coordinates><x>390</x><y>110</y><w>70</w><h>150</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>50;10;50;130;10;130</additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>70</y><w>190</w><h>30</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;170;10</additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>100</y><w>90</w><h>290</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>70;270;40;270;40;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>100</y><w>90</w><h>170</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>70;150;40;150;40;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>150</x><y>120</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>290</x><y>450</y><w>100</w><h>40</h></coordinates><panel_attributes>bg=gray
+halign=center
+valign=center
+Client</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>70</x><y>230</y><w>240</w><h>260</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>30;10;10;10;10;140;100;240;220;240</additional_attributes></element><element><id>Relation</id><coordinates><x>380</x><y>60</y><w>200</w><h>430</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>120;10;180;10;180;310;100;410;10;410</additional_attributes></element><element><id>UMLNote</id><coordinates><x>100</x><y>290</y><w>110</w><h>50</h></coordinates><panel_attributes>bg=light_gray
+e.featureB() </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>450</x><y>300</y><w>100</w><h>60</h></coordinates><panel_attributes>bg=light_gray
+halign=center
+valign=bottom
+v.visit(this)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>390</x><y>350</y><w>130</w><h>50</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;30;110;30;110;10</additional_attributes></element><element><id>Relation</id><coordinates><x>110</x><y>260</y><w>30</w><h>50</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;30;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>330</x><y>480</y><w>30</w><h>50</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;30;10;10</additional_attributes></element></diagram>

@@ -1,0 +1,36 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>370</x><y>190</y><w>120</w><h>140</h></coordinates><panel_attributes>bg=gray
+AbstractClass
+--
+...
+--
++ templateMethod()
++ step1()
++ step2()
++ step3()
++ step4()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>290</x><y>400</y><w>120</w><h>90</h></coordinates><panel_attributes>bg=gray
+ConcreteClass1
+--
+...
+--
++ step3()
++ step4()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>460</x><y>400</y><w>120</w><h>140</h></coordinates><panel_attributes>bg=gray
+ConcreteClass2
+--
+...
+--
++ step1()
++ step2()
++ step3()
++ step4()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>330</x><y>320</y><w>120</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>100;10;100;50;10;50;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>420</x><y>320</y><w>120</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50;100;50;100;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>570</x><y>200</y><w>100</w><h>130</h></coordinates><panel_attributes>bg=light_gray
+halign=left
+step1()
+if (step2())
+{
+step3()
+}
+else {
+step4()
+}
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>480</x><y>230</y><w>110</w><h>30</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;90;10</additional_attributes></element></diagram>

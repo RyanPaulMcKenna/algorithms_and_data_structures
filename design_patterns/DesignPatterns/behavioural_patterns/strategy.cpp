@@ -1,3 +1,5 @@
+#include <iostream>
+
 class Engine {
     public:
         virtual void move() = 0;
@@ -6,14 +8,14 @@ class Engine {
 class CombustionEngine: public Engine {
     public:
         void move() {
-            // ... brum!
+            std::cout << "Combustion Engine: Brum brum! ";
         }
 }; // CombustionEngine is Concrete class
 
 class ElectricEngine: public Engine {
     public:
         void move() {
-            // ... zing!
+            std::cout << "Electric Engine: Zing! ";
         }
 }; // ElectricEngine is Concrete class
 
@@ -25,14 +27,14 @@ class Driver {
 class Robot: public Driver {
     public:
         void navigate() {
-            // ...
+           std::cout << "ROBOT: Navigating protcol initiated!" << std::endl;
         }
 }; // Robot is Concrete class
 
 class Human: public Driver {
     public:
         void navigate() {
-            // ...
+            std::cout << "HUMAN: And so the journey begins!" << std::endl;
         }
 }; // Human is Concrete class
 
@@ -41,8 +43,8 @@ class Transport {
         Engine* engine;
         Driver* driver;
     public:
-        Transport(Driver* d) {
-            engine = new CombustionEngine(); // Composition , Engine's dies when Transport dies
+        Transport(Driver* d, Engine* e) {
+            engine = e;
             driver = d; // Aggregation, driver does not die when Transport dies
         }
         ~Transport() {
@@ -62,3 +64,15 @@ Is a design pattern that enables an algorithm's behavior to be selected at runti
 Prevents the need for complex inheritance hierarchies. Different "dimensions" of functionality
 are extracted into own class hierarchies.
 */
+int main() {
+    Driver* driver = new Robot();
+    Engine* engine = new CombustionEngine();
+    Transport* transport = new Transport(driver, engine);
+    transport->deliver();
+    delete transport;
+    delete driver;
+    driver = new Human();
+    engine = new ElectricEngine();
+    transport = new Transport(driver, engine);
+    transport->deliver();
+}

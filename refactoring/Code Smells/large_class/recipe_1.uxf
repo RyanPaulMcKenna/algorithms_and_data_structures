@@ -1,0 +1,19 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>50</x><y>390</y><w>160</w><h>120</h></coordinates><panel_attributes>bg=white
+Person
+--
+name
+officeAreaCode
+officeNumber
+--
+getTelephoneNumber()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>390</x><y>390</y><w>160</w><h>120</h></coordinates><panel_attributes>bg=white
+Person
+--
+name
+--
+getTelephoneNumber()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>620</x><y>390</y><w>160</w><h>120</h></coordinates><panel_attributes>bg=white
+TelephoneNumber
+--
+officeAreaCode
+officeNumber
+--
+getTelephoneNumber()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>540</x><y>460</y><w>100</w><h>30</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>80;10;10;10</additional_attributes></element></diagram>

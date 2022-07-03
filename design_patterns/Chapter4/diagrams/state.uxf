@@ -1,0 +1,51 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>valign=center
+halign=center&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;UMLClass&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;390&lt;/x&gt;&lt;y&gt;340&lt;/y&gt;&lt;w&gt;80&lt;/w&gt;&lt;h&gt;70&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;bg=gray
+Draft
+--
++ render()
++ publish()&lt;/panel_attributes&gt;&lt;additional_attributes&gt;&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>224</x><y>260</y><w>130</w><h>110</h></coordinates><panel_attributes>bg=gray
+Document
+--
+-state
+--
++ render()
++ publish()
++ changeState(state)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>524</x><y>260</y><w>130</w><h>80</h></coordinates><panel_attributes>bg=gray
+&lt;&lt;interface&gt;&gt;
+State
+--
++ render()
++ publish()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>454</x><y>410</y><w>80</w><h>80</h></coordinates><panel_attributes>bg=gray
+Draft
+--
+- document
+--
++ render()
++ publish()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>344</x><y>290</y><w>200</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;180;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>184</x><y>410</y><w>190</w><h>80</h></coordinates><panel_attributes>bg=light_gray
+halign=left
+if (user.isAdmin or user.isAuthor)
+... Render the document
+else
+...Show an error message.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>64</x><y>300</y><w>100</w><h>30</h></coordinates><panel_attributes>bg=light_gray
+halign=left
+state.render()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>84</x><y>500</y><w>290</w><h>80</h></coordinates><panel_attributes>bg=light_gray
+halign=left
+if (user.isAdmin)
+document.changeState(new Published(document))
+else
+document.changeState(new Moderation(document))</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>154</x><y>300</y><w>90</w><h>30</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;70;10</additional_attributes></element><element><id>Relation</id><coordinates><x>364</x><y>450</y><w>110</w><h>100</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;80;50;80;50;10;90;10</additional_attributes></element><element><id>Relation</id><coordinates><x>364</x><y>430</y><w>110</w><h>30</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;90;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>544</x><y>410</y><w>80</w><h>80</h></coordinates><panel_attributes>bg=gray
+Moderation
+--
+- document
+--
++ render()
++ publish()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>634</x><y>410</y><w>80</w><h>80</h></coordinates><panel_attributes>bg=gray
+Published
+--
+- document
+--
++ render()
++ publish()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>574</x><y>330</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>574</x><y>330</y><w>120</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;50;100;50;100;80</additional_attributes></element><element><id>Relation</id><coordinates><x>484</x><y>330</y><w>120</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>100;10;100;50;10;50;10;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>244</x><y>140</y><w>80</w><h>50</h></coordinates><panel_attributes>bg=gray
+valign=center
+halign=center
+Client</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>180</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>180</y><w>220</w><h>250</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;10;50;160;50;160;200;200;200;200;230</additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>180</y><w>310</w><h>250</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;10;50;160;50;160;190;290;190;290;230</additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>180</y><w>410</w><h>250</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;10;50;160;50;160;180;390;180;390;230</additional_attributes></element></diagram>
