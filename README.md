@@ -3,7 +3,21 @@
 My implementations of various standard algorithms, datastructures and design patterns in C++.
 
 Folders structured as follows:
-
+    - algos_and_ds
+        - DataStructures
+        - DynamicProgramming
+        - Selection
+        - Sorting
+    - design_patterns
+        - Chapter1
+        - Chapter2
+        - Chapter3
+        - Chapter4
+        - DesignPatterns
+            - behavioural_patterns
+            - creational_patterns
+            - structural_patterns
+    - refactoring/Code Smells
 
 ```c++
 // Online C++ compiler to run C++ program online
